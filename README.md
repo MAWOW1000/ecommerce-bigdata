@@ -58,10 +58,21 @@ cp .env.example .env
 
 ## Chạy pipeline
 
+Chạy tất cả một lệnh:
+
+```bash
+./scripts/run_all.sh
+```
+
+Hoặc từng bước:
+
 ```bash
 uv run python -m ecommerce_bigdata.seed_sql     # Chương 2: schema + dữ liệu quan hệ
 uv run python -m ecommerce_bigdata.seed_mongo   # Chương 3: log vào MongoDB
-uv run python -m ecommerce_bigdata.analytics    # Chương 4: join + biểu đồ
+uv run python scripts/generate_erd.py           # Chương 2: vẽ lại ERD
+uv run python -m ecommerce_bigdata.analytics    # Chương 4: join + 6 biểu đồ
+uv run python -m ecommerce_bigdata.report       # Sinh BaoCao_ECommerce_BigData.docx
+./scripts/export_pdf.sh                         # Xuất PDF (cần LibreOffice)
 ```
 
 ## Ứng dụng demo
@@ -93,3 +104,16 @@ Chi tiết tại [`docs/01_yeu_cau_nghiep_vu.md`](docs/01_yeu_cau_nghiep_vu.md).
 doanh thu theo tháng/danh mục, top sản phẩm bán chạy, phân khúc khách hàng RFM,
 tỷ lệ hủy đơn theo vùng, cảnh báo tồn kho, hiệu suất người bán, AOV theo kênh thanh toán,
 hiệu quả khuyến mãi, thời gian giao hàng theo hãng, tỷ lệ đánh giá thấp theo danh mục.
+
+## Nội dung báo cáo
+
+| Chương | Nguồn | Sinh ra từ |
+|---|---|---|
+| 1. Tổng quan bài toán | `docs/01_yeu_cau_nghiep_vu.md` | Viết tay |
+| 2. Thiết kế CSDL quan hệ | `docs/02_thiet_ke_csdl.md` | Viết tay + ERD sinh tự động |
+| 3. NoSQL | `docs/03_nosql.md` | Viết tay |
+| 4. Phân tích dữ liệu lớn | `docs/04_phan_tich.md` | **Sinh tự động** bởi `analytics.py` |
+
+`report.py` gộp bốn file Markdown trên thành `BaoCao_ECommerce_BigData.docx`, kèm
+trang bìa, mục lục tự động và số trang. Sửa thông tin sinh viên ở biến `STUDENT`
+trong `src/ecommerce_bigdata/report.py` trước khi nộp.

@@ -266,11 +266,11 @@ def chart_funnel(funnel: pd.DataFrame) -> None:
     ax.set_ylim(0, values.max() * 1.22)
 
     drop = 100 - pct[-1]
-    _save(fig, "01_funnel", "Pheu chuyen doi",
-          f"Tu luot xem san pham den luc mua hang, he thong mat {drop:.1f}% so phien. "
-          f"Hut lon nhat nam o buoc tu 'Them vao gio' ({pct[1]:.1f}%) xuong "
-          f"'Bat dau thanh toan' ({pct[2]:.1f}%), goi y rang man hinh gio hang "
-          f"va chi phi van chuyen la diem can toi uu truoc tien.")
+    _save(fig, "01_funnel", "4.1. Phễu chuyển đổi",
+          f"Từ lượt xem sản phẩm đến lúc mua hàng, hệ thống mất {drop:.1f}% số phiên. "
+          f"Hụt lớn nhất nằm ở bước từ 'Thêm vào giỏ' ({pct[1]:.1f}%) xuống "
+          f"'Bắt đầu thanh toán' ({pct[2]:.1f}%), gợi ý rằng màn hình giỏ hàng "
+          f"và chi phí vận chuyển là điểm cần tối ưu trước tiên.")
 
 
 def chart_monthly_revenue(monthly: pd.DataFrame) -> None:
@@ -294,11 +294,11 @@ def chart_monthly_revenue(monthly: pd.DataFrame) -> None:
 
     best = total.loc[total["revenue"].idxmax()]
     worst = total.loc[total["revenue"].idxmin()]
-    _save(fig, "02_monthly_revenue", "Xu huong doanh thu theo thang",
-          f"Doanh thu dat dinh vao {best['month']:%m/%Y} ({best['revenue']/1e9:.1f} ty) "
-          f"va thap nhat vao {worst['month']:%m/%Y} ({worst['revenue']/1e9:.1f} ty). "
-          f"Bon danh muc dan dau la {', '.join(top_cats)}; ke hoach nhap hang nen bam "
-          f"theo nhip mua vu nay.")
+    _save(fig, "02_monthly_revenue", "4.2. Xu hướng doanh thu theo tháng",
+          f"Doanh thu đạt đỉnh vào {best['month']:%m/%Y} ({best['revenue']/1e9:.1f} tỷ) "
+          f"và thấp nhất vào {worst['month']:%m/%Y} ({worst['revenue']/1e9:.1f} tỷ). "
+          f"Bốn danh mục dẫn đầu là {', '.join(top_cats)}; kế hoạch nhập hàng nên bám "
+          f"theo nhịp mùa vụ này.")
 
 
 def chart_view_vs_revenue(product: pd.DataFrame) -> None:
@@ -323,13 +323,13 @@ def chart_view_vs_revenue(product: pd.DataFrame) -> None:
     df["rank_rev"] = df["revenue"].rank(pct=True)
     leak = df[(df["rank_view"] > 0.75) & (df["rank_rev"] < 0.35)]
 
-    _save(fig, "03_view_vs_revenue", "Luot xem so voi doanh thu",
-          f"He so tuong quan giua luot xem va doanh thu chi dat {corr:.2f}, nghia la "
-          f"nhieu nguoi xem khong bao dam ban duoc hang. Co {len(leak)} san pham nam "
-          f"trong nhom 25% duoc xem nhieu nhat nhung lai thuoc 35% doanh thu thap nhat "
-          f"- day la nhom can ra soat lai gia ban, anh mo ta va chi phi van chuyen. "
-          f"Phat hien nay chi co duoc khi gop du lieu hanh vi (MongoDB) voi du lieu "
-          f"giao dich (PostgreSQL).")
+    _save(fig, "03_view_vs_revenue", "4.3. Lượt xem so với doanh thu",
+          f"Hệ số tương quan giữa lượt xem và doanh thu chỉ đạt {corr:.2f}, nghĩa là "
+          f"nhiều người xem không bảo đảm bán được hàng. Có {len(leak)} sản phẩm nằm "
+          f"trong nhóm 25% được xem nhiều nhất nhưng lại thuộc 35% doanh thu thấp nhất "
+          f"— đây là nhóm cần rà soát lại giá bán, ảnh mô tả và chi phí vận chuyển. "
+          f"Phát hiện này chỉ có được khi gộp dữ liệu hành vi (MongoDB) với dữ liệu "
+          f"giao dịch (PostgreSQL).")
 
 
 def chart_hourly_heatmap(hourly: pd.DataFrame) -> None:
@@ -349,11 +349,11 @@ def chart_hourly_heatmap(hourly: pd.DataFrame) -> None:
     peak = by_hour.idxmax()
     quiet = by_hour.idxmin()
     top_platform = pivot.sum(axis=1).idxmax()
-    _save(fig, "04_hourly_heatmap", "Mat do su kien theo gio",
-          f"Luu luong dat dinh luc {peak:02d}h va thap nhat luc {quiet:02d}h. "
-          f"Nen tang chiem nhieu su kien nhat la {top_platform}. Khung gio cao diem "
-          f"nay quyet dinh thoi diem chay khuyen mai flash sale, dong thoi la can cu "
-          f"de dat lich sao luu va bao tri he thong vao khung gio thap diem.")
+    _save(fig, "04_hourly_heatmap", "4.4. Mật độ sự kiện theo giờ",
+          f"Lưu lượng đạt đỉnh lúc {peak:02d}h và thấp nhất lúc {quiet:02d}h. "
+          f"Nền tảng chiếm nhiều sự kiện nhất là {top_platform}. Khung giờ cao điểm "
+          f"này quyết định thời điểm chạy khuyến mãi flash sale, đồng thời là căn cứ "
+          f"để đặt lịch sao lưu và bảo trì hệ thống vào khung giờ thấp điểm.")
 
 
 def chart_carrier_performance(shipments: pd.DataFrame) -> None:
@@ -385,21 +385,21 @@ def chart_carrier_performance(shipments: pd.DataFrame) -> None:
     # Tinh tuong quan tu chinh du lieu thay vi khang dinh san.
     corr = agg["days"].corr(agg["scans"]) if len(agg) > 2 else float("nan")
     if pd.notna(corr) and corr >= 0.6:
-        relation = (f"So chang trung chuyen di lien voi thoi gian giao (tuong quan "
-                    f"{corr:.2f}): hang cang nhieu diem quet thi don cang lau den tay "
-                    f"khach, goi y nen rut bot chang cho cac tuyen noi thanh.")
+        relation = (f"Số chặng trung chuyển đi liền với thời gian giao (tương quan "
+                    f"{corr:.2f}): hãng càng nhiều điểm quét thì đơn càng lâu đến tay "
+                    f"khách, gợi ý nên rút bớt chặng cho các tuyến nội thành.")
     elif pd.notna(corr) and corr <= -0.6:
-        relation = (f"So chang trung chuyen ngich chieu voi thoi gian giao (tuong quan "
+        relation = (f"Số chặng trung chuyển ngược chiều với thời gian giao (tương quan "
                     f"{corr:.2f}).")
     else:
-        relation = (f"Tuong quan giua so chang trung chuyen va thoi gian giao chi dat "
-                    f"{corr:.2f}, nghia la chenh lech toc do den tu nang luc noi bo cua "
-                    f"tung hang chu khong phai do so diem trung chuyen.")
+        relation = (f"Tương quan giữa số chặng trung chuyển và thời gian giao chỉ đạt "
+                    f"{corr:.2f}, nghĩa là chênh lệch tốc độ đến từ năng lực nội bộ của "
+                    f"từng hãng chứ không phải do số điểm trung chuyển.")
 
-    _save(fig, "05_carrier_performance", "Hieu suat don vi van chuyen",
-          f"{fastest} giao nhanh nhat ({agg['days'].iloc[0]:.2f} ngay), {slowest} cham "
-          f"nhat ({agg['days'].iloc[-1]:.2f} ngay) - chenh {gap:.2f} ngay. {relation} "
-          f"Nen uu tien {fastest} cho cac don gap.")
+    _save(fig, "05_carrier_performance", "4.5. Hiệu suất đơn vị vận chuyển",
+          f"{fastest} giao nhanh nhất ({agg['days'].iloc[0]:.2f} ngày), {slowest} chậm "
+          f"nhất ({agg['days'].iloc[-1]:.2f} ngày) — chênh {gap:.2f} ngày. {relation} "
+          f"Nên ưu tiên {fastest} cho các đơn gấp.")
 
 
 def chart_category_mix(product: pd.DataFrame) -> None:
@@ -423,11 +423,11 @@ def chart_category_mix(product: pd.DataFrame) -> None:
     billions = (agg["revenue"] / 1e9)
     agg["view_per_billion"] = agg["views"] / billions.where(billions > 0)
     hot = agg["view_per_billion"].idxmax()
-    _save(fig, "06_category_mix", "Doanh thu va luot quan tam theo danh muc",
-          f"Danh muc {agg.index[0]} dan dau doanh thu. Nguoc lai, {hot} thu hut nhieu "
-          f"luot xem nhat tren moi ty doanh thu - nhieu nguoi quan tam nhung gia tri "
-          f"don thap, phu hop de lam san pham keo chan khach roi ban cheo sang danh "
-          f"muc gia tri cao hon.")
+    _save(fig, "06_category_mix", "4.6. Doanh thu và lượt quan tâm theo danh mục",
+          f"Danh mục {agg.index[0]} dẫn đầu doanh thu. Ngược lại, {hot} thu hút nhiều "
+          f"lượt xem nhất trên mỗi tỷ doanh thu — nhiều người quan tâm nhưng giá trị "
+          f"đơn thấp, phù hợp để làm sản phẩm kéo chân khách rồi bán chéo sang danh "
+          f"mục giá trị cao hơn.")
 
 
 # ---------------------------------------------------------------------------
