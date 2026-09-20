@@ -60,6 +60,11 @@ export function StorePage({ search, cart, setCart }: Props) {
     toast.success("Đã thêm vào giỏ", { description: p.productname })
   }
 
+  const changeQuantity = (variantId: number, quantity: number) => {
+    setCart((prev) =>
+      prev.map((l) => (l.variant_id === variantId ? { ...l, quantity } : l)))
+  }
+
   const removeFromCart = (variantId: number) => {
     const line = cart.find((l) => l.variant_id === variantId)
     setCart((prev) => prev.filter((l) => l.variant_id !== variantId))
@@ -178,6 +183,7 @@ export function StorePage({ search, cart, setCart }: Props) {
           onCustomerChange={(id) => { setCustomerId(id); tracker.setUser(id) }}
           onProvinceChange={setProvince}
           onRemove={removeFromCart}
+          onQuantityChange={changeQuantity}
           onCheckout={() => void checkout()}
         />
         <EventStream />

@@ -71,10 +71,11 @@ SPA_INDEX = STATIC_DIR / "app" / "index.html"
 
 
 def _page() -> FileResponse:
-    """Uu tien giao dien React da build; chua build thi dung ban HTML thuan."""
-    if SPA_INDEX.exists():
-        return FileResponse(SPA_INDEX)
-    return FileResponse(STATIC_DIR / "storefront.html")
+    """Tra ve giao dien React da build (frontend/ -> web/static/app)."""
+    if not SPA_INDEX.exists():
+        raise HTTPException(
+            503, "Chua build giao dien. Chay: cd frontend && pnpm install && pnpm build")
+    return FileResponse(SPA_INDEX)
 
 
 @app.get("/")

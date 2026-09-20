@@ -1,4 +1,5 @@
-import { AlertTriangle, CheckCircle2, ShoppingBag, Trash2 } from "lucide-react"
+import { AlertTriangle, CheckCircle2, Minus, Plus, ShoppingBag, Trash2 } from "lucide-react"
+import { Input } from "@/components/ui/input"
 import type { Customer } from "@/lib/api"
 import { vnd } from "@/lib/api"
 import { Button } from "@/components/ui/button"
@@ -37,12 +38,13 @@ type Props = {
   onCustomerChange: (id: number | null) => void
   onProvinceChange: (p: string) => void
   onRemove: (variantId: number) => void
+  onQuantityChange: (variantId: number, quantity: number) => void
   onCheckout: () => void
 }
 
 export function CartPanel({
   lines, customers, customerId, province, result, busy,
-  onCustomerChange, onProvinceChange, onRemove, onCheckout,
+  onCustomerChange, onProvinceChange, onRemove, onQuantityChange, onCheckout,
 }: Props) {
   const total = lines.reduce((s, l) => s + l.unit_price * l.quantity, 0)
 
@@ -100,20 +102,48 @@ export function CartPanel({
         ) : (
           <div className="thin-scroll max-h-[230px] space-y-2 overflow-y-auto pr-1">
             {lines.map((l) => (
-              <div key={l.variant_id} className="flex items-center gap-2">
+              <div key={l.variant_id} className="flex items-start gap-2">
                 <img src={l.image_url} alt="" className="size-10 shrink-0 rounded object-cover" />
-                <div className="min-w-0 flex-1">
+
+                <div className="min-w-0 flex-1 space-y-1">
                   <p className="truncate text-[12px] leading-tight">{l.name}</p>
-                  <p className="text-[11px] text-muted-foreground">
-                    {vnd(l.unit_price)} × {l.quantity}
-                  </p>
+                  <p className="text-[11px] text-muted-foreground">{vnd(l.unit_price)}</p>
+
+                  {/* O nhap so luong: cho phep go so lon de demo trigger chan don
+                      khi vuot ton kho - phan rang buoc toan ven cua Chuong 2. */}
+                  <div className="flex items-center gap-1">
+                    <button
+                      onClick={() => onQuantityChange(l.variant_id, l.quantity - 1)}
+                      disabled={l.quantity <= 1}
+                      className="grid size-6 place-items-center rounded border border-border text-muted-foreground disabled:opacity-40 hover:border-brand hover:text-brand"
+                      aria-label="Giảm"
+                    >
+                      <Minus className="size-3" />
+                    </button>
+                    <Input
+                      type="number"
+                      min={1}
+                      value={l.quantity}
+                      onChange={(e) =>
+                        onQuantityChange(l.variant_id, Math.max(1, Number(e.target.value) || 1))}
+                      className="h-6 w-[74px] px-1.5 text-center text-[11.5px] tabular-nums"
+                    />
+                    <button
+                      onClick={() => onQuantityChange(l.variant_id, l.quantity + 1)}
+                      className="grid size-6 place-items-center rounded border border-border text-muted-foreground hover:border-brand hover:text-brand"
+                      aria-label="Tăng"
+                    >
+                      <Plus className="size-3" />
+                    </button>
+                    <span className="ml-auto text-[12px] font-semibold text-brand">
+                      {vnd(l.unit_price * l.quantity)}
+                    </span>
+                  </div>
                 </div>
-                <span className="shrink-0 text-[12px] font-semibold text-brand">
-                  {vnd(l.unit_price * l.quantity)}
-                </span>
+
                 <button
                   onClick={() => onRemove(l.variant_id)}
-                  className="shrink-0 text-muted-foreground hover:text-destructive"
+                  className="mt-0.5 shrink-0 text-muted-foreground hover:text-destructive"
                   aria-label="Xóa"
                 >
                   <Trash2 className="size-3.5" />
@@ -131,6 +161,12 @@ export function CartPanel({
               <span className="text-[16px] font-bold text-brand">{vnd(total)}</span>
             </div>
           </>
+        )}
+
+        {lines.length > 0 && (
+          <p className="rounded-md bg-muted px-2.5 py-1.5 text-[10.5px] leading-snug text-muted-foreground">
+            Gõ số lượng lớn hơn tồn kho để xem trigger chặn đơn và rollback.
+          </p>
         )}
 
         <Button
