@@ -1,0 +1,322 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1980" height="1215" viewBox="0 0 1980 1215" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+<rect width="1980" height="1215" fill="#ffffff"/>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#ee4d2d" fill-opacity="0.75"/></marker></defs>
+<text x="40" y="38" font-size="20" font-weight="700" fill="#1f2937">So do thuc the - lien ket (ERD): San thuong mai dien tu da nguoi ban</text>
+<path d="M320 205.0 H365.0 V217.5 H430" fill="none" stroke="#ee4d2d" stroke-width="1.6" stroke-opacity="0.8" marker-end="url(#arrow)"/><rect x="348.0" y="194.5" width="34.0" height="17" rx="4" fill="#ffffff" stroke="#c7ccd6" stroke-width="0.8"/><text x="365.0" y="207.0" font-size="9.5" text-anchor="middle" fill="#1f2937" font-weight="600">1 : N</text>
+<path d="M320 477.5 H385.0 V217.5 H430" fill="none" stroke="#ee4d2d" stroke-width="1.6" stroke-opacity="0.8" marker-end="url(#arrow)"/><rect x="368.0" y="354.5" width="34.0" height="17" rx="4" fill="#ffffff" stroke="#c7ccd6" stroke-width="0.8"/><text x="385.0" y="367.0" font-size="9.5" text-anchor="middle" fill="#1f2937" font-weight="600">1 : N</text>
+<path d="M580.0 325 V430" fill="none" stroke="#ee4d2d" stroke-width="1.6" stroke-opacity="0.8" marker-end="url(#arrow)"/><rect x="563.0" y="368.5" width="34.0" height="17" rx="4" fill="#ffffff" stroke="#c7ccd6" stroke-width="0.8"/><text x="580.0" y="381.0" font-size="9.5" text-anchor="middle" fill="#1f2937" font-weight="600">1 : N</text>
+<path d="M580.0 620 V700" fill="none" stroke="#ee4d2d" stroke-width="1.6" stroke-opacity="0.8" marker-end="url(#arrow)"/><rect x="563.0" y="651.0" width="34.0" height="17" rx="4" fill="#ffffff" stroke="#c7ccd6" stroke-width="0.8"/><text x="580.0" y="663.5" font-size="9.5" text-anchor="middle" fill="#1f2937" font-weight="600">1 : 1</text>
+<path d="M730 525.0 H845.0 V860.0 H900" fill="none" stroke="#ee4d2d" stroke-width="1.6" stroke-opacity="0.8" marker-end="url(#arrow)"/><rect x="828.0" y="683.5" width="34.0" height="17" rx="4" fill="#ffffff" stroke="#c7ccd6" stroke-width="0.8"/><text x="845.0" y="696.0" font-size="9.5" text-anchor="middle" fill="#1f2937" font-weight="600">1 : N</text>
+<path d="M1050.0 325 V430" fill="none" stroke="#ee4d2d" stroke-width="1.6" stroke-opacity="0.8" marker-end="url(#arrow)"/><rect x="1033.0" y="368.5" width="34.0" height="17" rx="4" fill="#ffffff" stroke="#c7ccd6" stroke-width="0.8"/><text x="1050.0" y="381.0" font-size="9.5" text-anchor="middle" fill="#1f2937" font-weight="600">1 : N</text>
+<path d="M1050.0 670 V790" fill="none" stroke="#ee4d2d" stroke-width="1.6" stroke-opacity="0.8" marker-end="url(#arrow)"/><rect x="1033.0" y="721.0" width="34.0" height="17" rx="4" fill="#ffffff" stroke="#c7ccd6" stroke-width="0.8"/><text x="1050.0" y="733.5" font-size="9.5" text-anchor="middle" fill="#1f2937" font-weight="600">1 : N</text>
+<path d="M1380 205.0 H1300.0 V550.0 H1200" fill="none" stroke="#ee4d2d" stroke-width="1.6" stroke-opacity="0.8" marker-end="url(#arrow)"/><rect x="1275.2" y="304.5" width="49.6" height="17" rx="4" fill="#ffffff" stroke="#c7ccd6" stroke-width="0.8"/><text x="1300.0" y="317.0" font-size="9.5" text-anchor="middle" fill="#1f2937" font-weight="600">0..1 : N</text>
+<path d="M1200 550.0 H1320.0 V465.0 H1380" fill="none" stroke="#ee4d2d" stroke-width="1.6" stroke-opacity="0.8" marker-end="url(#arrow)"/><rect x="1303.0" y="470.0" width="34.0" height="17" rx="4" fill="#ffffff" stroke="#c7ccd6" stroke-width="0.8"/><text x="1320.0" y="482.5" font-size="9.5" text-anchor="middle" fill="#1f2937" font-weight="600">1 : 1</text>
+<path d="M1200 550.0 H1340.0 V727.5 H1380" fill="none" stroke="#ee4d2d" stroke-width="1.6" stroke-opacity="0.8" marker-end="url(#arrow)"/><rect x="1323.0" y="629.75" width="34.0" height="17" rx="4" fill="#ffffff" stroke="#c7ccd6" stroke-width="0.8"/><text x="1340.0" y="642.25" font-size="9.5" text-anchor="middle" fill="#1f2937" font-weight="600">1 : 1</text>
+<path d="M730 217.5 H1360.0 V985.0 H1380" fill="none" stroke="#ee4d2d" stroke-width="1.6" stroke-opacity="0.8" marker-end="url(#arrow)"/><rect x="1343.0" y="624.25" width="34.0" height="17" rx="4" fill="#ffffff" stroke="#c7ccd6" stroke-width="0.8"/><text x="1360.0" y="636.75" font-size="9.5" text-anchor="middle" fill="#1f2937" font-weight="600">1 : N</text>
+<path d="M1200 217.5 H1380.0 V985.0 H1380" fill="none" stroke="#ee4d2d" stroke-width="1.6" stroke-opacity="0.8" marker-end="url(#arrow)"/><rect x="1363.0" y="656.25" width="34.0" height="17" rx="4" fill="#ffffff" stroke="#c7ccd6" stroke-width="0.8"/><text x="1380.0" y="668.75" font-size="9.5" text-anchor="middle" fill="#1f2937" font-weight="600">1 : N</text>
+<g class="entity">
+<rect x="40" y="110" width="280" height="190" rx="8" fill="#fdf6e9" stroke="#c7ccd6" stroke-width="1.2"/>
+<path d="M40 144 h280" stroke="#c7ccd6" stroke-width="1.2"/>
+<rect x="40" y="110" width="280" height="34" rx="8" fill="#ee4d2d" fill-opacity="0.92"/>
+<rect x="40" y="136" width="280" height="8" fill="#ee4d2d" fill-opacity="0.92"/>
+<text x="50" y="133" font-size="15" font-weight="700" fill="#ffffff">Seller</text>
+<rect x="50" y="150" width="46" height="16" rx="4" fill="#fde68a"/><text x="73" y="162" font-size="9.5" text-anchor="middle" fill="#374151" font-weight="600">PK</text>
+<text x="102" y="162" font-size="12" font-weight="700" fill="#1f2937">SellerID</text>
+<text x="310" y="162" font-size="10" text-anchor="end" fill="#6b7280">INT IDENTITY</text>
+<rect x="50" y="175" width="46" height="16" rx="4" fill="#e5e7eb"/><text x="73" y="187" font-size="9.5" text-anchor="middle" fill="#374151" font-weight="600">UQ</text>
+<text x="102" y="187" font-size="12" font-weight="400" fill="#1f2937">ShopName</text>
+<text x="310" y="187" font-size="10" text-anchor="end" fill="#6b7280">NVARCHAR(150)</text>
+<rect x="50" y="200" width="46" height="16" rx="4" fill="#e5e7eb"/><text x="73" y="212" font-size="9.5" text-anchor="middle" fill="#374151" font-weight="600">UQ</text>
+<text x="102" y="212" font-size="12" font-weight="400" fill="#1f2937">ContactEmail</text>
+<text x="310" y="212" font-size="10" text-anchor="end" fill="#6b7280">VARCHAR(255)</text>
+
+<text x="50" y="237" font-size="12" font-weight="400" fill="#6b7280">Province</text>
+<text x="310" y="237" font-size="10" text-anchor="end" fill="#6b7280">NVARCHAR(100)</text>
+
+<text x="50" y="262" font-size="12" font-weight="400" fill="#6b7280">JoinedAt</text>
+<text x="310" y="262" font-size="10" text-anchor="end" fill="#6b7280">DATETIME2</text>
+
+<text x="50" y="287" font-size="12" font-weight="400" fill="#6b7280">RatingAvg</text>
+<text x="310" y="287" font-size="10" text-anchor="end" fill="#6b7280">DECIMAL(3,2)</text>
+</g>
+<g class="entity">
+<rect x="40" y="420" width="280" height="115" rx="8" fill="#fff4f0" stroke="#c7ccd6" stroke-width="1.2"/>
+<path d="M40 454 h280" stroke="#c7ccd6" stroke-width="1.2"/>
+<rect x="40" y="420" width="280" height="34" rx="8" fill="#ee4d2d" fill-opacity="0.92"/>
+<rect x="40" y="446" width="280" height="8" fill="#ee4d2d" fill-opacity="0.92"/>
+<text x="50" y="443" font-size="15" font-weight="700" fill="#ffffff">Category</text>
+<rect x="50" y="460" width="46" height="16" rx="4" fill="#fde68a"/><text x="73" y="472" font-size="9.5" text-anchor="middle" fill="#374151" font-weight="600">PK</text>
+<text x="102" y="472" font-size="12" font-weight="700" fill="#1f2937">CategoryID</text>
+<text x="310" y="472" font-size="10" text-anchor="end" fill="#6b7280">INT IDENTITY</text>
+<rect x="50" y="485" width="46" height="16" rx="4" fill="#e5e7eb"/><text x="73" y="497" font-size="9.5" text-anchor="middle" fill="#374151" font-weight="600">UQ</text>
+<text x="102" y="497" font-size="12" font-weight="400" fill="#1f2937">CategoryName</text>
+<text x="310" y="497" font-size="10" text-anchor="end" fill="#6b7280">NVARCHAR(120)</text>
+<rect x="50" y="510" width="46" height="16" rx="4" fill="#dbeafe"/><text x="73" y="522" font-size="9.5" text-anchor="middle" fill="#374151" font-weight="600">FK</text>
+<text x="102" y="522" font-size="12" font-weight="400" fill="#1f2937">ParentID</text>
+<text x="310" y="522" font-size="10" text-anchor="end" fill="#6b7280">INT NULL</text>
+</g>
+<g class="entity">
+<rect x="430" y="110" width="300" height="215" rx="8" fill="#fff4f0" stroke="#c7ccd6" stroke-width="1.2"/>
+<path d="M430 144 h300" stroke="#c7ccd6" stroke-width="1.2"/>
+<rect x="430" y="110" width="300" height="34" rx="8" fill="#ee4d2d" fill-opacity="0.92"/>
+<rect x="430" y="136" width="300" height="8" fill="#ee4d2d" fill-opacity="0.92"/>
+<text x="440" y="133" font-size="15" font-weight="700" fill="#ffffff">Product</text>
+<rect x="440" y="150" width="46" height="16" rx="4" fill="#fde68a"/><text x="463" y="162" font-size="9.5" text-anchor="middle" fill="#374151" font-weight="600">PK</text>
+<text x="492" y="162" font-size="12" font-weight="700" fill="#1f2937">ProductID</text>
+<text x="720" y="162" font-size="10" text-anchor="end" fill="#6b7280">INT IDENTITY</text>
+<rect x="440" y="175" width="46" height="16" rx="4" fill="#dbeafe"/><text x="463" y="187" font-size="9.5" text-anchor="middle" fill="#374151" font-weight="600">FK</text>
+<text x="492" y="187" font-size="12" font-weight="400" fill="#1f2937">SellerID</text>
+<text x="720" y="187" font-size="10" text-anchor="end" fill="#6b7280">INT</text>
+<rect x="440" y="200" width="46" height="16" rx="4" fill="#dbeafe"/><text x="463" y="212" font-size="9.5" text-anchor="middle" fill="#374151" font-weight="600">FK</text>
+<text x="492" y="212" font-size="12" font-weight="400" fill="#1f2937">CategoryID</text>
+<text x="720" y="212" font-size="10" text-anchor="end" fill="#6b7280">INT</text>
+
+<text x="440" y="237" font-size="12" font-weight="400" fill="#6b7280">ProductName</text>
+<text x="720" y="237" font-size="10" text-anchor="end" fill="#6b7280">NVARCHAR(250)</text>
+
+<text x="440" y="262" font-size="12" font-weight="400" fill="#6b7280">BasePrice</text>
+<text x="720" y="262" font-size="10" text-anchor="end" fill="#6b7280">DECIMAL(18,2)</text>
+
+<text x="440" y="287" font-size="12" font-weight="400" fill="#6b7280">IsApproved</text>
+<text x="720" y="287" font-size="10" text-anchor="end" fill="#6b7280">BIT</text>
+
+<text x="440" y="312" font-size="12" font-weight="400" fill="#6b7280">CreatedAt</text>
+<text x="720" y="312" font-size="10" text-anchor="end" fill="#6b7280">DATETIME2</text>
+</g>
+<g class="entity">
+<rect x="430" y="430" width="300" height="190" rx="8" fill="#fff4f0" stroke="#c7ccd6" stroke-width="1.2"/>
+<path d="M430 464 h300" stroke="#c7ccd6" stroke-width="1.2"/>
+<rect x="430" y="430" width="300" height="34" rx="8" fill="#ee4d2d" fill-opacity="0.92"/>
+<rect x="430" y="456" width="300" height="8" fill="#ee4d2d" fill-opacity="0.92"/>
+<text x="440" y="453" font-size="15" font-weight="700" fill="#ffffff">ProductVariant</text>
+<rect x="440" y="470" width="46" height="16" rx="4" fill="#fde68a"/><text x="463" y="482" font-size="9.5" text-anchor="middle" fill="#374151" font-weight="600">PK</text>
+<text x="492" y="482" font-size="12" font-weight="700" fill="#1f2937">VariantID</text>
+<text x="720" y="482" font-size="10" text-anchor="end" fill="#6b7280">INT IDENTITY</text>
+<rect x="440" y="495" width="46" height="16" rx="4" fill="#dbeafe"/><text x="463" y="507" font-size="9.5" text-anchor="middle" fill="#374151" font-weight="600">FK</text>
+<text x="492" y="507" font-size="12" font-weight="400" fill="#1f2937">ProductID</text>
+<text x="720" y="507" font-size="10" text-anchor="end" fill="#6b7280">INT</text>
+<rect x="440" y="520" width="46" height="16" rx="4" fill="#e5e7eb"/><text x="463" y="532" font-size="9.5" text-anchor="middle" fill="#374151" font-weight="600">UQ</text>
+<text x="492" y="532" font-size="12" font-weight="400" fill="#1f2937">SKU</text>
+<text x="720" y="532" font-size="10" text-anchor="end" fill="#6b7280">VARCHAR(64)</text>
+
+<text x="440" y="557" font-size="12" font-weight="400" fill="#6b7280">Color</text>
+<text x="720" y="557" font-size="10" text-anchor="end" fill="#6b7280">NVARCHAR(50)</text>
+
+<text x="440" y="582" font-size="12" font-weight="400" fill="#6b7280">Size</text>
+<text x="720" y="582" font-size="10" text-anchor="end" fill="#6b7280">NVARCHAR(30)</text>
+
+<text x="440" y="607" font-size="12" font-weight="400" fill="#6b7280">PriceAdjust</text>
+<text x="720" y="607" font-size="10" text-anchor="end" fill="#6b7280">DECIMAL(18,2)</text>
+</g>
+<g class="entity">
+<rect x="430" y="700" width="300" height="140" rx="8" fill="#fff4f0" stroke="#c7ccd6" stroke-width="1.2"/>
+<path d="M430 734 h300" stroke="#c7ccd6" stroke-width="1.2"/>
+<rect x="430" y="700" width="300" height="34" rx="8" fill="#ee4d2d" fill-opacity="0.92"/>
+<rect x="430" y="726" width="300" height="8" fill="#ee4d2d" fill-opacity="0.92"/>
+<text x="440" y="723" font-size="15" font-weight="700" fill="#ffffff">Inventory</text>
+<rect x="440" y="740" width="46" height="16" rx="4" fill="#fde68a"/><text x="463" y="752" font-size="9.5" text-anchor="middle" fill="#374151" font-weight="600">PK,FK</text>
+<text x="492" y="752" font-size="12" font-weight="700" fill="#1f2937">VariantID</text>
+<text x="720" y="752" font-size="10" text-anchor="end" fill="#6b7280">INT</text>
+
+<text x="440" y="777" font-size="12" font-weight="400" fill="#6b7280">QuantityOnHand</text>
+<text x="720" y="777" font-size="10" text-anchor="end" fill="#6b7280">INT</text>
+
+<text x="440" y="802" font-size="12" font-weight="400" fill="#6b7280">SafetyStock</text>
+<text x="720" y="802" font-size="10" text-anchor="end" fill="#6b7280">INT</text>
+
+<text x="440" y="827" font-size="12" font-weight="400" fill="#6b7280">UpdatedAt</text>
+<text x="720" y="827" font-size="10" text-anchor="end" fill="#6b7280">DATETIME2</text>
+</g>
+<g class="entity">
+<rect x="900" y="110" width="300" height="215" rx="8" fill="#fdf6e9" stroke="#c7ccd6" stroke-width="1.2"/>
+<path d="M900 144 h300" stroke="#c7ccd6" stroke-width="1.2"/>
+<rect x="900" y="110" width="300" height="34" rx="8" fill="#ee4d2d" fill-opacity="0.92"/>
+<rect x="900" y="136" width="300" height="8" fill="#ee4d2d" fill-opacity="0.92"/>
+<text x="910" y="133" font-size="15" font-weight="700" fill="#ffffff">Customer</text>
+<rect x="910" y="150" width="46" height="16" rx="4" fill="#fde68a"/><text x="933" y="162" font-size="9.5" text-anchor="middle" fill="#374151" font-weight="600">PK</text>
+<text x="962" y="162" font-size="12" font-weight="700" fill="#1f2937">CustomerID</text>
+<text x="1190" y="162" font-size="10" text-anchor="end" fill="#6b7280">INT IDENTITY</text>
+
+<text x="910" y="187" font-size="12" font-weight="400" fill="#6b7280">FullName</text>
+<text x="1190" y="187" font-size="10" text-anchor="end" fill="#6b7280">NVARCHAR(150)</text>
+<rect x="910" y="200" width="46" height="16" rx="4" fill="#e5e7eb"/><text x="933" y="212" font-size="9.5" text-anchor="middle" fill="#374151" font-weight="600">UQ</text>
+<text x="962" y="212" font-size="12" font-weight="400" fill="#1f2937">Email</text>
+<text x="1190" y="212" font-size="10" text-anchor="end" fill="#6b7280">VARCHAR(255)</text>
+
+<text x="910" y="237" font-size="12" font-weight="400" fill="#6b7280">Phone</text>
+<text x="1190" y="237" font-size="10" text-anchor="end" fill="#6b7280">VARCHAR(20)</text>
+
+<text x="910" y="262" font-size="12" font-weight="400" fill="#6b7280">Province</text>
+<text x="1190" y="262" font-size="10" text-anchor="end" fill="#6b7280">NVARCHAR(100)</text>
+
+<text x="910" y="287" font-size="12" font-weight="400" fill="#6b7280">Address</text>
+<text x="1190" y="287" font-size="10" text-anchor="end" fill="#6b7280">NVARCHAR(300)</text>
+
+<text x="910" y="312" font-size="12" font-weight="400" fill="#6b7280">RegisteredAt</text>
+<text x="1190" y="312" font-size="10" text-anchor="end" fill="#6b7280">DATETIME2</text>
+</g>
+<g class="entity">
+<rect x="900" y="430" width="300" height="240" rx="8" fill="#eef4ff" stroke="#c7ccd6" stroke-width="1.2"/>
+<path d="M900 464 h300" stroke="#c7ccd6" stroke-width="1.2"/>
+<rect x="900" y="430" width="300" height="34" rx="8" fill="#ee4d2d" fill-opacity="0.92"/>
+<rect x="900" y="456" width="300" height="8" fill="#ee4d2d" fill-opacity="0.92"/>
+<text x="910" y="453" font-size="15" font-weight="700" fill="#ffffff">Orders</text>
+<rect x="910" y="470" width="46" height="16" rx="4" fill="#fde68a"/><text x="933" y="482" font-size="9.5" text-anchor="middle" fill="#374151" font-weight="600">PK</text>
+<text x="962" y="482" font-size="12" font-weight="700" fill="#1f2937">OrderID</text>
+<text x="1190" y="482" font-size="10" text-anchor="end" fill="#6b7280">INT IDENTITY</text>
+<rect x="910" y="495" width="46" height="16" rx="4" fill="#dbeafe"/><text x="933" y="507" font-size="9.5" text-anchor="middle" fill="#374151" font-weight="600">FK</text>
+<text x="962" y="507" font-size="12" font-weight="400" fill="#1f2937">CustomerID</text>
+<text x="1190" y="507" font-size="10" text-anchor="end" fill="#6b7280">INT</text>
+<rect x="910" y="520" width="46" height="16" rx="4" fill="#dbeafe"/><text x="933" y="532" font-size="9.5" text-anchor="middle" fill="#374151" font-weight="600">FK</text>
+<text x="962" y="532" font-size="12" font-weight="400" fill="#1f2937">PromotionID</text>
+<text x="1190" y="532" font-size="10" text-anchor="end" fill="#6b7280">INT NULL</text>
+
+<text x="910" y="557" font-size="12" font-weight="400" fill="#6b7280">OrderDate</text>
+<text x="1190" y="557" font-size="10" text-anchor="end" fill="#6b7280">DATETIME2</text>
+
+<text x="910" y="582" font-size="12" font-weight="400" fill="#6b7280">Status</text>
+<text x="1190" y="582" font-size="10" text-anchor="end" fill="#6b7280">VARCHAR(12)</text>
+
+<text x="910" y="607" font-size="12" font-weight="400" fill="#6b7280">ShipProvince</text>
+<text x="1190" y="607" font-size="10" text-anchor="end" fill="#6b7280">NVARCHAR(100)</text>
+
+<text x="910" y="632" font-size="12" font-weight="400" fill="#6b7280">CancelReason</text>
+<text x="1190" y="632" font-size="10" text-anchor="end" fill="#6b7280">NVARCHAR(200)</text>
+
+<text x="910" y="657" font-size="12" font-weight="400" fill="#6b7280">DiscountAmount</text>
+<text x="1190" y="657" font-size="10" text-anchor="end" fill="#6b7280">DECIMAL(18,2)</text>
+</g>
+<g class="entity">
+<rect x="900" y="790" width="300" height="140" rx="8" fill="#eef4ff" stroke="#c7ccd6" stroke-width="1.2"/>
+<path d="M900 824 h300" stroke="#c7ccd6" stroke-width="1.2"/>
+<rect x="900" y="790" width="300" height="34" rx="8" fill="#ee4d2d" fill-opacity="0.92"/>
+<rect x="900" y="816" width="300" height="8" fill="#ee4d2d" fill-opacity="0.92"/>
+<text x="910" y="813" font-size="15" font-weight="700" fill="#ffffff">OrderDetail</text>
+<rect x="910" y="830" width="46" height="16" rx="4" fill="#fde68a"/><text x="933" y="842" font-size="9.5" text-anchor="middle" fill="#374151" font-weight="600">PK,FK</text>
+<text x="962" y="842" font-size="12" font-weight="700" fill="#1f2937">OrderID</text>
+<text x="1190" y="842" font-size="10" text-anchor="end" fill="#6b7280">INT</text>
+<rect x="910" y="855" width="46" height="16" rx="4" fill="#fde68a"/><text x="933" y="867" font-size="9.5" text-anchor="middle" fill="#374151" font-weight="600">PK,FK</text>
+<text x="962" y="867" font-size="12" font-weight="700" fill="#1f2937">VariantID</text>
+<text x="1190" y="867" font-size="10" text-anchor="end" fill="#6b7280">INT</text>
+
+<text x="910" y="892" font-size="12" font-weight="400" fill="#6b7280">Quantity</text>
+<text x="1190" y="892" font-size="10" text-anchor="end" fill="#6b7280">INT</text>
+
+<text x="910" y="917" font-size="12" font-weight="400" fill="#6b7280">UnitPrice</text>
+<text x="1190" y="917" font-size="10" text-anchor="end" fill="#6b7280">DECIMAL(18,2)</text>
+</g>
+<g class="entity">
+<rect x="1380" y="110" width="290" height="190" rx="8" fill="#eef4ff" stroke="#c7ccd6" stroke-width="1.2"/>
+<path d="M1380 144 h290" stroke="#c7ccd6" stroke-width="1.2"/>
+<rect x="1380" y="110" width="290" height="34" rx="8" fill="#ee4d2d" fill-opacity="0.92"/>
+<rect x="1380" y="136" width="290" height="8" fill="#ee4d2d" fill-opacity="0.92"/>
+<text x="1390" y="133" font-size="15" font-weight="700" fill="#ffffff">Promotion</text>
+<rect x="1390" y="150" width="46" height="16" rx="4" fill="#fde68a"/><text x="1413" y="162" font-size="9.5" text-anchor="middle" fill="#374151" font-weight="600">PK</text>
+<text x="1442" y="162" font-size="12" font-weight="700" fill="#1f2937">PromotionID</text>
+<text x="1660" y="162" font-size="10" text-anchor="end" fill="#6b7280">INT IDENTITY</text>
+<rect x="1390" y="175" width="46" height="16" rx="4" fill="#e5e7eb"/><text x="1413" y="187" font-size="9.5" text-anchor="middle" fill="#374151" font-weight="600">UQ</text>
+<text x="1442" y="187" font-size="12" font-weight="400" fill="#1f2937">PromoCode</text>
+<text x="1660" y="187" font-size="10" text-anchor="end" fill="#6b7280">VARCHAR(40)</text>
+
+<text x="1390" y="212" font-size="12" font-weight="400" fill="#6b7280">DiscountPct</text>
+<text x="1660" y="212" font-size="10" text-anchor="end" fill="#6b7280">DECIMAL(5,2)</text>
+
+<text x="1390" y="237" font-size="12" font-weight="400" fill="#6b7280">MaxDiscount</text>
+<text x="1660" y="237" font-size="10" text-anchor="end" fill="#6b7280">DECIMAL(18,2)</text>
+
+<text x="1390" y="262" font-size="12" font-weight="400" fill="#6b7280">StartDate</text>
+<text x="1660" y="262" font-size="10" text-anchor="end" fill="#6b7280">DATE</text>
+
+<text x="1390" y="287" font-size="12" font-weight="400" fill="#6b7280">EndDate</text>
+<text x="1660" y="287" font-size="10" text-anchor="end" fill="#6b7280">DATE</text>
+</g>
+<g class="entity">
+<rect x="1380" y="370" width="290" height="190" rx="8" fill="#eefaf2" stroke="#c7ccd6" stroke-width="1.2"/>
+<path d="M1380 404 h290" stroke="#c7ccd6" stroke-width="1.2"/>
+<rect x="1380" y="370" width="290" height="34" rx="8" fill="#ee4d2d" fill-opacity="0.92"/>
+<rect x="1380" y="396" width="290" height="8" fill="#ee4d2d" fill-opacity="0.92"/>
+<text x="1390" y="393" font-size="15" font-weight="700" fill="#ffffff">Payment</text>
+<rect x="1390" y="410" width="46" height="16" rx="4" fill="#fde68a"/><text x="1413" y="422" font-size="9.5" text-anchor="middle" fill="#374151" font-weight="600">PK</text>
+<text x="1442" y="422" font-size="12" font-weight="700" fill="#1f2937">PaymentID</text>
+<text x="1660" y="422" font-size="10" text-anchor="end" fill="#6b7280">INT IDENTITY</text>
+<rect x="1390" y="435" width="46" height="16" rx="4" fill="#dbeafe"/><text x="1413" y="447" font-size="9.5" text-anchor="middle" fill="#374151" font-weight="600">UQ,FK</text>
+<text x="1442" y="447" font-size="12" font-weight="400" fill="#1f2937">OrderID</text>
+<text x="1660" y="447" font-size="10" text-anchor="end" fill="#6b7280">INT</text>
+
+<text x="1390" y="472" font-size="12" font-weight="400" fill="#6b7280">Method</text>
+<text x="1660" y="472" font-size="10" text-anchor="end" fill="#6b7280">VARCHAR(15)</text>
+
+<text x="1390" y="497" font-size="12" font-weight="400" fill="#6b7280">Status</text>
+<text x="1660" y="497" font-size="10" text-anchor="end" fill="#6b7280">VARCHAR(10)</text>
+
+<text x="1390" y="522" font-size="12" font-weight="400" fill="#6b7280">Amount</text>
+<text x="1660" y="522" font-size="10" text-anchor="end" fill="#6b7280">DECIMAL(18,2)</text>
+
+<text x="1390" y="547" font-size="12" font-weight="400" fill="#6b7280">PaidAt</text>
+<text x="1660" y="547" font-size="10" text-anchor="end" fill="#6b7280">DATETIME2</text>
+</g>
+<g class="entity">
+<rect x="1380" y="620" width="290" height="215" rx="8" fill="#eefaf2" stroke="#c7ccd6" stroke-width="1.2"/>
+<path d="M1380 654 h290" stroke="#c7ccd6" stroke-width="1.2"/>
+<rect x="1380" y="620" width="290" height="34" rx="8" fill="#ee4d2d" fill-opacity="0.92"/>
+<rect x="1380" y="646" width="290" height="8" fill="#ee4d2d" fill-opacity="0.92"/>
+<text x="1390" y="643" font-size="15" font-weight="700" fill="#ffffff">Shipment</text>
+<rect x="1390" y="660" width="46" height="16" rx="4" fill="#fde68a"/><text x="1413" y="672" font-size="9.5" text-anchor="middle" fill="#374151" font-weight="600">PK</text>
+<text x="1442" y="672" font-size="12" font-weight="700" fill="#1f2937">ShipmentID</text>
+<text x="1660" y="672" font-size="10" text-anchor="end" fill="#6b7280">INT IDENTITY</text>
+<rect x="1390" y="685" width="46" height="16" rx="4" fill="#dbeafe"/><text x="1413" y="697" font-size="9.5" text-anchor="middle" fill="#374151" font-weight="600">UQ,FK</text>
+<text x="1442" y="697" font-size="12" font-weight="400" fill="#1f2937">OrderID</text>
+<text x="1660" y="697" font-size="10" text-anchor="end" fill="#6b7280">INT</text>
+
+<text x="1390" y="722" font-size="12" font-weight="400" fill="#6b7280">Carrier</text>
+<text x="1660" y="722" font-size="10" text-anchor="end" fill="#6b7280">NVARCHAR(80)</text>
+<rect x="1390" y="735" width="46" height="16" rx="4" fill="#e5e7eb"/><text x="1413" y="747" font-size="9.5" text-anchor="middle" fill="#374151" font-weight="600">UQ</text>
+<text x="1442" y="747" font-size="12" font-weight="400" fill="#1f2937">TrackingNo</text>
+<text x="1660" y="747" font-size="10" text-anchor="end" fill="#6b7280">VARCHAR(64)</text>
+
+<text x="1390" y="772" font-size="12" font-weight="400" fill="#6b7280">Status</text>
+<text x="1660" y="772" font-size="10" text-anchor="end" fill="#6b7280">VARCHAR(12)</text>
+
+<text x="1390" y="797" font-size="12" font-weight="400" fill="#6b7280">ShippedAt</text>
+<text x="1660" y="797" font-size="10" text-anchor="end" fill="#6b7280">DATETIME2</text>
+
+<text x="1390" y="822" font-size="12" font-weight="400" fill="#6b7280">DeliveredAt</text>
+<text x="1660" y="822" font-size="10" text-anchor="end" fill="#6b7280">DATETIME2</text>
+</g>
+<g class="entity">
+<rect x="1380" y="890" width="290" height="190" rx="8" fill="#eefaf2" stroke="#c7ccd6" stroke-width="1.2"/>
+<path d="M1380 924 h290" stroke="#c7ccd6" stroke-width="1.2"/>
+<rect x="1380" y="890" width="290" height="34" rx="8" fill="#ee4d2d" fill-opacity="0.92"/>
+<rect x="1380" y="916" width="290" height="8" fill="#ee4d2d" fill-opacity="0.92"/>
+<text x="1390" y="913" font-size="15" font-weight="700" fill="#ffffff">Review</text>
+<rect x="1390" y="930" width="46" height="16" rx="4" fill="#fde68a"/><text x="1413" y="942" font-size="9.5" text-anchor="middle" fill="#374151" font-weight="600">PK</text>
+<text x="1442" y="942" font-size="12" font-weight="700" fill="#1f2937">ReviewID</text>
+<text x="1660" y="942" font-size="10" text-anchor="end" fill="#6b7280">INT IDENTITY</text>
+<rect x="1390" y="955" width="46" height="16" rx="4" fill="#dbeafe"/><text x="1413" y="967" font-size="9.5" text-anchor="middle" fill="#374151" font-weight="600">FK</text>
+<text x="1442" y="967" font-size="12" font-weight="400" fill="#1f2937">ProductID</text>
+<text x="1660" y="967" font-size="10" text-anchor="end" fill="#6b7280">INT</text>
+<rect x="1390" y="980" width="46" height="16" rx="4" fill="#dbeafe"/><text x="1413" y="992" font-size="9.5" text-anchor="middle" fill="#374151" font-weight="600">FK</text>
+<text x="1442" y="992" font-size="12" font-weight="400" fill="#1f2937">CustomerID</text>
+<text x="1660" y="992" font-size="10" text-anchor="end" fill="#6b7280">INT</text>
+<rect x="1390" y="1005" width="46" height="16" rx="4" fill="#dbeafe"/><text x="1413" y="1017" font-size="9.5" text-anchor="middle" fill="#374151" font-weight="600">FK</text>
+<text x="1442" y="1017" font-size="12" font-weight="400" fill="#1f2937">OrderID</text>
+<text x="1660" y="1017" font-size="10" text-anchor="end" fill="#6b7280">INT</text>
+
+<text x="1390" y="1042" font-size="12" font-weight="400" fill="#6b7280">Rating</text>
+<text x="1660" y="1042" font-size="10" text-anchor="end" fill="#6b7280">TINYINT</text>
+
+<text x="1390" y="1067" font-size="12" font-weight="400" fill="#6b7280">Comment</text>
+<text x="1660" y="1067" font-size="10" text-anchor="end" fill="#6b7280">NVARCHAR(1000)</text>
+</g>
+<text x="40" y="1163" font-size="11.5" font-weight="700" fill="#1f2937">Chu giai</text>
+<rect x="40" y="1171" width="42" height="16" rx="4" fill="#fde68a"/>
+<text x="61" y="1182.5" font-size="9.5" text-anchor="middle" fill="#374151" font-weight="600">PK</text>
+<text x="90" y="1183" font-size="11" fill="#6b7280">Khoa chinh</text>
+<rect x="230" y="1171" width="42" height="16" rx="4" fill="#dbeafe"/>
+<text x="251" y="1182.5" font-size="9.5" text-anchor="middle" fill="#374151" font-weight="600">FK</text>
+<text x="280" y="1183" font-size="11" fill="#6b7280">Khoa ngoai</text>
+<rect x="420" y="1171" width="42" height="16" rx="4" fill="#e5e7eb"/>
+<text x="441" y="1182.5" font-size="9.5" text-anchor="middle" fill="#374151" font-weight="600">UQ</text>
+<text x="470" y="1183" font-size="11" fill="#6b7280">Rang buoc duy nhat</text>
+<text x="640" y="1183" font-size="11" fill="#6b7280">Mui ten tro tu bang cha sang bang con (phia khoa ngoai)</text>
+</svg>
