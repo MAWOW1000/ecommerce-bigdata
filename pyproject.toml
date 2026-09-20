@@ -19,6 +19,7 @@ dependencies = [
     "pyspark==3.5.3",
     "python-docx>=1.2.0",
     "python-dotenv>=1.2.3",
+    "setuptools>=84.0.0",
     "uvicorn[standard]>=0.53.0",
 ]
 

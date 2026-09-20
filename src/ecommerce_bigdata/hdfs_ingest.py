@@ -151,17 +151,25 @@ def extract_mongo() -> dict[str, int]:
         "source": e.get("source", "mock"),
     } for e in events])
 
-    # Phan vung theo ngay - dung dung cach Hive/Spark to chuc du lieu lon:
-    # truy van loc theo ngay se chi doc dung thu muc can, bo qua phan con lai.
-    df_events["event_date"] = pd.to_datetime(df_events["timestamp"]).dt.date.astype(str)
+    # Phan vung theo THANG - dung cach Hive/Spark to chuc du lieu lon: truy van
+    # loc theo thoi gian chi doc dung thu muc can, bo qua phan con lai.
+    #
+    # Khong phan vung theo NGAY du de bai trai dai 20 thang: 610 ngay se sinh ra
+    # 610 file vai chuc KB. Do la "small files problem" kinh dien cua HDFS -
+    # NameNode phai giu metadata cho tung file trong RAM, va moi file du nho van
+    # chiem mot khoi rieng. Quy tac thuc te: moi phan vung nen tu 128 MB tro len,
+    # hoac it nhat du lon de khong lang phi metadata.
+    ts = pd.to_datetime(df_events["timestamp"])
+    df_events["event_month"] = ts.dt.strftime("%Y-%m")
 
     events_dir = STAGING / "clickstream_events"
     shutil.rmtree(events_dir, ignore_errors=True)
     df_events.to_parquet(events_dir, engine="pyarrow", compression="snappy",
-                         index=False, partition_cols=["event_date"])
+                         index=False, partition_cols=["event_month"])
     counts["clickstream_events"] = len(df_events)
     n_parts = len(list(events_dir.rglob("*.parquet")))
-    print(f"   clickstream_events {len(df_events):>7,} dong  ->  {n_parts} phan vung theo ngay")
+    print(f"   clickstream_events {len(df_events):>7,} dong  ->  "
+          f"{n_parts} phan vung theo thang")
 
     # --- Log quet ma vach
     scans = list(db["shipment_scans"].find({}, {"_id": 0, "operator": 0}))

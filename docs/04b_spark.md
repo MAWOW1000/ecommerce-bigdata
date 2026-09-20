@@ -59,3 +59,48 @@ mâu thuẫn với việc chọn Spark: giá trị của nó nằm ở chỗ khi
 trăm triệu dòng thì pandas không chạy nổi nữa, còn Spark chỉ cần thêm máy vào cụm.
 Đây cũng là một kết luận nghiệp vụ đáng lưu ý — **không phải bài toán nào cũng cần
 Big Data**.
+
+## 4B.5. Kết quả chạy thực tế
+
+Spark 3.5.3 đọc trực tiếp từ `hdfs://127.0.0.1:9000/ecommerce/raw`:
+
+| Tập dữ liệu | Số dòng | Số phân vùng Spark |
+|---|---|---|
+| `dim_product` | 300 | 1 |
+| `fact_order_line` | 14.319 | 1 |
+| `fact_shipment` | 3.972 | 1 |
+| `clickstream_events` | 50.029 | 11 |
+| `shipment_scans` | 22.195 | 1 |
+
+### Phễu chuyển đổi (tính bằng Spark)
+
+| Bước | Số phiên | Số sự kiện | Tỷ lệ còn lại |
+|---|---|---|---|
+| Xem sản phẩm | 6.043 | 14.019 | 100,00% |
+| Thêm vào giỏ | 4.182 | 6.468 | 69,20% |
+| Bắt đầu thanh toán | 2.394 | 2.961 | 39,62% |
+| Mua hàng | 1.350 | 1.520 | 22,34% |
+
+### Hiệu suất vận chuyển — kết quả của phép gộp hai nguồn
+
+Bảng dưới đây là **minh chứng rõ nhất cho giá trị của kiến trúc kép**: ba cột đầu đến
+từ CSDL quan hệ, hai cột cuối đến từ log quét mã vạch trong MongoDB, gộp trên khóa
+`tracking_no`.
+
+| Đơn vị vận chuyển | Số lô | Số ngày giao TB | P95 (ngày) | Số lần quét TB | Số trạm TB |
+|---|---|---|---|---|---|
+| GHN | 719 | 2,18 | 3,58 | 3,9 | 3,1 |
+| GHTK | 733 | 2,64 | 4,13 | 4,6 | 3,5 |
+| J&T Express | 670 | 3,08 | 4,62 | 5,4 | 3,9 |
+| Viettel Post | 712 | 3,39 | 4,72 | 6,5 | 4,4 |
+| Ninja Van | 676 | 3,85 | 5,29 | 7,5 | 4,7 |
+
+**Ý nghĩa nghiệp vụ.** Hai cột cuối tăng đều cùng chiều với số ngày giao: GHN đi qua
+3,1 trạm và giao trong 2,18 ngày, trong khi Ninja Van đi qua 4,7 trạm và mất 3,85
+ngày. Mỗi trạm trung chuyển cộng thêm khoảng nửa ngày. Kết luận cho vận hành: với
+đơn nội thành cần gấp nên ưu tiên hãng có mạng lưới tuyến thẳng; còn muốn cải thiện
+hãng đang chậm thì phải giảm số chặng chứ không phải giục tài xế.
+
+Không nguồn dữ liệu nào một mình cho ra kết luận này — CSDL quan hệ biết đơn giao mất
+bao lâu nhưng không biết vì sao, còn log quét mã vạch biết đường đi nhưng không biết
+kết quả kinh doanh.

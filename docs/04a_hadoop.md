@@ -68,9 +68,9 @@ JSON. Parquet là định dạng **lưu theo cột**:
 │   ├── fact_order_line.parquet
 │   ├── fact_shipment.parquet
 │   ├── shipment_scans.parquet
-│   └── clickstream_events/       ← phân vùng theo ngày
-│       ├── event_date=2025-01-01/
-│       ├── event_date=2025-01-02/
+│   └── clickstream_events/       ← phân vùng theo tháng
+│       ├── event_month=2025-01/
+│       ├── event_month=2025-02/
 │       └── ...
 └── curated/                      ← kết quả sau khi Spark xử lý
     ├── san_pham_gop_hai_nguon/
@@ -79,10 +79,24 @@ JSON. Parquet là định dạng **lưu theo cột**:
 ```
 
 **Phân vùng (partitioning)** là kỹ thuật quan trọng nhất ở đây. Thư mục
-`clickstream_events` được chia theo `event_date`. Khi Spark chạy truy vấn có điều
-kiện `WHERE event_date >= '2026-01-01'`, nó **bỏ qua hoàn toàn** các thư mục không
+`clickstream_events` được chia theo `event_month`. Khi Spark chạy truy vấn có điều
+kiện `WHERE event_month >= '2026-01'`, nó **bỏ qua hoàn toàn** các thư mục không
 thỏa mãn thay vì đọc rồi lọc — gọi là *partition pruning*. Với dữ liệu hàng tỷ dòng,
 đây là khác biệt giữa vài giây và vài giờ.
+
+### Chọn độ mịn của phân vùng
+
+Bản cài đặt đầu tiên phân vùng theo **ngày**. Dữ liệu trải 20 tháng nên sinh ra 610
+thư mục, mỗi thư mục chỉ chứa một file vài chục KB. Đây chính là **"small files
+problem"** kinh điển của HDFS:
+
+- NameNode giữ metadata của **mọi** file và khối trong RAM. Hàng triệu file nhỏ làm
+  NameNode hết bộ nhớ, dù tổng dung lượng dữ liệu không lớn.
+- Mỗi file dù chỉ 30 KB vẫn chiếm một khối riêng về mặt metadata.
+- Spark phải mở 610 file thay vì vài file lớn, chi phí mở file lấn át chi phí đọc.
+
+Vì vậy bản cuối chuyển sang phân vùng theo **tháng** — 20 phân vùng. Quy tắc thực tế
+trong sản xuất: mỗi phân vùng nên đạt từ 128 MB trở lên, tức bằng đúng một khối HDFS.
 
 Hai lớp `raw` và `curated` phản ánh mô hình **data lake** phổ biến: lớp thô giữ
 nguyên dữ liệu gốc để có thể tính lại khi logic thay đổi; lớp tinh chứa kết quả đã
@@ -99,3 +113,24 @@ uv run python -m ecommerce_bigdata.spark_analytics # Spark đọc từ HDFS và 
 
 Giao diện web của NameNode tại `http://127.0.0.1:9870` cho phép duyệt cây thư mục
 HDFS, xem số khối của từng file và tình trạng DataNode — dùng để minh họa khi demo.
+
+## 4A.6. Kết quả chạy thực tế
+
+Cụm HDFS đã chạy và nạp dữ liệu thành công:
+
+| Chỉ số | Giá trị |
+|---|---|
+| Phiên bản Hadoop | 3.4.1 |
+| Số DataNode hoạt động | 1 |
+| Tổng bản ghi đã nạp | 91.315 |
+| Số file trên `/ecommerce/raw` | 26 |
+| Số khối (block) | 26 |
+| Kích thước khối trung bình | 178 KB |
+| Hệ số nhân bản | 1 |
+| Dung lượng lớp `raw` | 4,4 MB |
+| Dung lượng lớp `curated` | 30,6 KB |
+| Trạng thái hệ thống tệp | `HEALTHY` |
+
+Đáng chú ý: 91.315 bản ghi từ hai CSDL chỉ chiếm **4,4 MB** ở định dạng Parquet nén
+Snappy. Cùng lượng dữ liệu đó xuất ra CSV sẽ lớn gấp nhiều lần — minh chứng cho hiệu
+quả nén của định dạng lưu theo cột.

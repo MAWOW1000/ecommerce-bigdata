@@ -5,6 +5,7 @@
 # khong bat sshd. Khoi dong thang tung daemon thi khong can SSH.
 set -euo pipefail
 source "$(dirname "${BASH_SOURCE[0]}")/hadoop_env.sh"
+export JAVA_HOME  # cac daemon con ke thua bien nay
 
 DATA_DIR="${PROJECT_DIR}/data"
 mkdir -p "${HADOOP_LOG_DIR}" "${DATA_DIR}/hdfs"
@@ -18,6 +19,13 @@ mkdir -p "${DATA_DIR}/hdfs/runtime"
 cp "${HADOOP_CONF_DIR}/core-site.xml.generated" "${DATA_DIR}/hdfs/runtime/core-site.xml"
 cp "${HADOOP_CONF_DIR}/hdfs-site.xml.generated" "${DATA_DIR}/hdfs/runtime/hdfs-site.xml"
 cp "${HADOOP_CONF_DIR}/hadoop-env.sh"           "${DATA_DIR}/hdfs/runtime/hadoop-env.sh"
+
+# Hadoop can them mot so file cau hinh mac dinh; copy tu ban cai goc sang
+# thu muc runtime de khong con canh bao "log4j.properties is not found".
+for f in log4j.properties hadoop-metrics2.properties workers; do
+  [[ -f "${HADOOP_HOME}/etc/hadoop/${f}" ]] \
+    && cp "${HADOOP_HOME}/etc/hadoop/${f}" "${DATA_DIR}/hdfs/runtime/${f}"
+done
 rm -f "${HADOOP_CONF_DIR}"/*.generated
 export HADOOP_CONF_DIR="${DATA_DIR}/hdfs/runtime"
 

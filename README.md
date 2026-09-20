@@ -17,6 +17,9 @@
 |---|---|
 | CSDL quan hệ | SQL Server 2022 (bản nộp) / PostgreSQL 17 (bản chạy thử) |
 | NoSQL | MongoDB 8.0 (cài native, không Docker) |
+| Lưu trữ phân tán | Apache Hadoop HDFS 3.4.1 (pseudo-distributed, cài native) |
+| Xử lý phân tán | Apache Spark 3.5.3 (PySpark, chế độ `local[*]`) |
+| Định dạng dữ liệu lớn | Apache Parquet (nén Snappy, phân vùng theo tháng) |
 | Ngôn ngữ | Python 3.13 |
 | Giao diện | React 19 + TypeScript + Vite + Tailwind v4 + shadcn/ui |
 | Biểu đồ trên web | Recharts |
@@ -34,6 +37,7 @@
 │   ├── seed_sql.py    # Sinh dữ liệu giả lập cho CSDL quan hệ
 │   ├── seed_mongo.py  # Sinh clickstream + log quét mã vạch
 │   └── analytics.py   # Join SQL ↔ MongoDB, vẽ biểu đồ
+├── conf/hadoop/     # Cấu hình HDFS (core-site, hdfs-site)
 ├── frontend/        # Giao diện React (Vite), build ra web/static/app
 ├── scripts/         # Cài đặt và khởi động MongoDB / PostgreSQL / web
 └── assets/          # ERD và biểu đồ xuất ra
@@ -49,10 +53,14 @@ uv sync
 ./scripts/install_mongodb.sh
 ./scripts/start_mongodb.sh
 
-# 3. PostgreSQL (cần sudo để tạo role/database)
+# 3. Hadoop HDFS (native, không cần sudo — cần Java 17)
+./scripts/install_hadoop.sh
+./scripts/start_hdfs.sh          # NameNode + DataNode, web UI tại :9870
+
+# 4. PostgreSQL (cần sudo để tạo role/database)
 ./scripts/setup_postgres.sh
 
-# 4. Cấu hình
+# 5. Cấu hình
 cp .env.example .env
 ```
 
@@ -112,7 +120,9 @@ hiệu quả khuyến mãi, thời gian giao hàng theo hãng, tỷ lệ đánh 
 | 1. Tổng quan bài toán | `docs/01_yeu_cau_nghiep_vu.md` | Viết tay |
 | 2. Thiết kế CSDL quan hệ | `docs/02_thiet_ke_csdl.md` | Viết tay + ERD sinh tự động |
 | 3. NoSQL | `docs/03_nosql.md` | Viết tay |
-| 4. Phân tích dữ liệu lớn | `docs/04_phan_tich.md` | **Sinh tự động** bởi `analytics.py` |
+| 4A. Hadoop / HDFS | `docs/04a_hadoop.md` | Viết tay |
+| 4B. Spark | `docs/04b_spark.md` | Viết tay |
+| 4C. Biểu đồ phân tích | `docs/04_phan_tich.md` | **Sinh tự động** bởi `analytics.py` |
 
 `report.py` gộp bốn file Markdown trên thành `BaoCao_ECommerce_BigData.docx`, kèm
 trang bìa, mục lục tự động và số trang. Sửa thông tin sinh viên ở biến `STUDENT`
