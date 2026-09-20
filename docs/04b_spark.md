@@ -104,3 +104,18 @@ hãng đang chậm thì phải giảm số chặng chứ không phải giục t�
 Không nguồn dữ liệu nào một mình cho ra kết luận này — CSDL quan hệ biết đơn giao mất
 bao lâu nhưng không biết vì sao, còn log quét mã vạch biết đường đi nhưng không biết
 kết quả kinh doanh.
+
+## 4B.6. Demo trên giao diện web
+
+Trang `/bigdata` của ứng dụng demo trình bày toàn bộ tầng Big Data, phục vụ đúng yêu
+cầu *"demo luồng dữ liệu lưu trữ trên NoSQL/Hadoop và một dashboard trực quan hóa"*:
+
+| Khu vực | Nguồn dữ liệu | Nội dung |
+|---|---|---|
+| Trạng thái cụm | JMX của NameNode (`:9870/jmx`) | Số DataNode sống, tổng khối, tổng file, dung lượng đã dùng |
+| Cây thư mục HDFS | WebHDFS REST API | Duyệt `/ecommerce`, thấy phân vùng `event_month=` và hệ số nhân bản từng file |
+| Kết quả Spark | Lớp `curated` trên HDFS | Sáu bảng kết quả kèm biểu đồ tương ứng |
+
+Biểu đồ *Hiệu suất vận chuyển* đặt cạnh nhau hai cột: số ngày giao (từ PostgreSQL) và
+số trạm trung chuyển (từ MongoDB). Hai cột tăng cùng chiều qua cả năm hãng — hình ảnh
+này minh họa trực tiếp giá trị của việc gộp hai nguồn dữ liệu.

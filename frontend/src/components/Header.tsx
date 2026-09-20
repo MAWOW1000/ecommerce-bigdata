@@ -1,9 +1,11 @@
-import { BarChart3, Database, Leaf, Search, ShoppingCart, Store } from "lucide-react"
+import { BarChart3, Database, Leaf, Search, Server, ShoppingCart, Store } from "lucide-react"
 import { Input } from "@/components/ui/input"
 
+type Page = "store" | "dashboard" | "bigdata"
+
 type Props = {
-  page: "store" | "dashboard"
-  onNavigate: (page: "store" | "dashboard") => void
+  page: Page
+  onNavigate: (page: Page) => void
   search: string
   onSearchChange: (v: string) => void
   onSearchSubmit: () => void
@@ -20,6 +22,7 @@ export function Header({
         <div className="flex items-center gap-4 text-[11.5px] text-white/80">
           <span className="flex items-center gap-1"><Database className="size-3" /> PostgreSQL · giao dịch</span>
           <span className="flex items-center gap-1"><Leaf className="size-3" /> MongoDB · hành vi</span>
+          <span className="flex items-center gap-1"><Server className="size-3" /> HDFS + Spark · phân tích</span>
           <span className="ml-auto hidden sm:block">Đồ án CSDL &amp; Big Data</span>
         </div>
 
@@ -62,6 +65,12 @@ export function Header({
               onClick={() => onNavigate("dashboard")}
               icon={<BarChart3 className="size-4" />}
               label="Phân tích"
+            />
+            <NavButton
+              active={page === "bigdata"}
+              onClick={() => onNavigate("bigdata")}
+              icon={<Server className="size-4" />}
+              label="Big Data"
             />
           </nav>
         </div>

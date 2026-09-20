@@ -18,6 +18,11 @@ from decimal import Decimal
 from pathlib import Path
 from typing import Any
 
+import csv
+import json
+import urllib.error
+import urllib.request
+
 import psycopg
 from fastapi import FastAPI, HTTPException
 from fastapi.responses import FileResponse, JSONResponse
@@ -25,7 +30,7 @@ from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
 from pymongo import DESCENDING, MongoClient
 
-from ..config import MONGO, PG
+from ..config import EXPORT_DIR, MONGO, PG
 
 STATIC_DIR = Path(__file__).parent / "static"
 
@@ -85,6 +90,11 @@ def storefront() -> FileResponse:
 
 @app.get("/dashboard")
 def dashboard() -> FileResponse:
+    return _page()
+
+
+@app.get("/bigdata")
+def bigdata() -> FileResponse:
     return _page()
 
 
@@ -364,3 +374,111 @@ def conversion_funnel() -> dict:
     for s in steps:
         s["conversion_pct"] = round(100 * s["sessions"] / top, 2)
     return {"steps": steps}
+
+
+# ============================================================ Tang Hadoop
+NAMENODE_WEB = "http://127.0.0.1:9870"
+SPARK_RESULT_DIR = EXPORT_DIR / "spark"
+
+# Cac bang ket qua do Spark ghi ra, kem nhan hien thi
+SPARK_TABLES: dict[str, str] = {
+    "pheu_chuyen_doi": "Phễu chuyển đổi",
+    "hieu_suat_van_chuyen": "Hiệu suất vận chuyển (gộp 2 nguồn)",
+    "san_pham_gop_hai_nguon": "Sản phẩm — doanh thu và hành vi",
+    "top_san_pham_moi_danh_muc": "Top 3 sản phẩm mỗi danh mục",
+    "doanh_thu_theo_thang": "Doanh thu theo tháng",
+    "gio_cao_diem": "Sự kiện theo giờ và nền tảng",
+}
+
+
+def _namenode_json(path: str, timeout: float = 3.0) -> dict:
+    """Goi REST API cua NameNode. Tra ve {} neu HDFS chua chay."""
+    try:
+        with urllib.request.urlopen(f"{NAMENODE_WEB}{path}", timeout=timeout) as resp:
+            return json.loads(resp.read())
+    except (urllib.error.URLError, TimeoutError, OSError, json.JSONDecodeError):
+        return {}
+
+
+@app.get("/api/hadoop/status")
+def hadoop_status() -> dict:
+    """Trang thai cum HDFS, doc tu JMX cua NameNode."""
+    beans = _namenode_json(
+        "/jmx?qry=Hadoop:service=NameNode,name=FSNamesystemState").get("beans")
+    if not beans:
+        return {"online": False}
+
+    b = beans[0]
+    total = b.get("CapacityTotal", 0)
+    used = b.get("CapacityUsed", 0)
+    return {
+        "online": True,
+        "capacity_total": total,
+        "capacity_used": used,
+        "capacity_remaining": b.get("CapacityRemaining", 0),
+        "used_pct": round(100 * used / total, 4) if total else 0,
+        "blocks_total": b.get("BlocksTotal", 0),
+        "files_total": b.get("FilesTotal", 0),
+        "live_datanodes": b.get("NumLiveDataNodes", 0),
+        "dead_datanodes": b.get("NumDeadDataNodes", 0),
+        "namenode_ui": NAMENODE_WEB,
+    }
+
+
+@app.get("/api/hadoop/ls")
+def hadoop_ls(path: str = "/ecommerce") -> dict:
+    """Duyet cay thu muc HDFS qua WebHDFS."""
+    data = _namenode_json(f"/webhdfs/v1{path}?op=LISTSTATUS")
+    entries = data.get("FileStatuses", {}).get("FileStatus")
+    if entries is None:
+        raise HTTPException(503, "HDFS chua chay hoac duong dan khong ton tai")
+
+    return {
+        "path": path,
+        "entries": [{
+            "name": e["pathSuffix"],
+            "type": e["type"],                 # FILE hoac DIRECTORY
+            "size": e.get("length", 0),
+            "block_size": e.get("blockSize", 0),
+            "replication": e.get("replication", 0),
+            "modified": e.get("modificationTime", 0),
+        } for e in sorted(entries, key=lambda x: (x["type"] != "DIRECTORY",
+                                                  x["pathSuffix"]))],
+    }
+
+
+@app.get("/api/spark/catalog")
+def spark_catalog() -> list[dict]:
+    """Danh sach bang ket qua Spark da ghi ra."""
+    return [{"name": name, "title": title,
+             "available": (SPARK_RESULT_DIR / f"{name}.csv").exists()}
+            for name, title in SPARK_TABLES.items()]
+
+
+@app.get("/api/spark/{name}")
+def spark_result(name: str, limit: int = 200) -> dict:
+    """Doc mot bang ket qua Spark (CSV do spark_analytics.py xuat ra)."""
+    if name not in SPARK_TABLES:
+        raise HTTPException(404, f"Khong co bang {name}")
+
+    path = SPARK_RESULT_DIR / f"{name}.csv"
+    if not path.exists():
+        raise HTTPException(
+            503, "Chua co ket qua. Chay: uv run python -m ecommerce_bigdata.spark_analytics")
+
+    with path.open(encoding="utf-8", newline="") as fh:
+        rows = list(csv.DictReader(fh))[:limit]
+
+    # CSV khong giu kieu du lieu -> doi lai so de giao dien can phai va dinh dang
+    for row in rows:
+        for key, value in row.items():
+            if value in ("", None):
+                row[key] = None
+                continue
+            try:
+                row[key] = int(value) if value.lstrip("-").isdigit() else float(value)
+            except ValueError:
+                pass
+
+    return {"name": name, "title": SPARK_TABLES[name],
+            "row_count": len(rows), "rows": rows}

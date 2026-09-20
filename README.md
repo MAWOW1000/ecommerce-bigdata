@@ -102,6 +102,9 @@ Hai trang:
   trigger chặn và toàn bộ transaction rollback — thông báo lỗi hiện nguyên văn trên UI.
 - **`/dashboard`** — chạy trực tiếp 10 view/procedure nghiệp vụ, cộng phễu chuyển đổi
   tính bằng MongoDB aggregation pipeline.
+- **`/bigdata`** — trạng thái cụm HDFS đọc từ JMX của NameNode, cây thư mục HDFS duyệt
+  qua WebHDFS (thấy rõ phân vùng `event_month=` và hệ số nhân bản của từng file), và
+  các bảng kết quả do Spark ghi ra lớp `curated`.
 
 Event sinh từ UI có thêm trường `source: "live_ui"` để phân biệt với dữ liệu mock,
 nhưng cùng cấu trúc document nên nằm chung một không gian phân tích.
