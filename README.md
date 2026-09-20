@@ -61,6 +61,24 @@ uv run python -m ecommerce_bigdata.seed_mongo   # Chương 3: log vào MongoDB
 uv run python -m ecommerce_bigdata.analytics    # Chương 4: join + biểu đồ
 ```
 
+## Ứng dụng demo
+
+```bash
+./scripts/restart_web.sh        # http://127.0.0.1:8000
+```
+
+Hai trang:
+
+- **`/` Storefront** — sản phẩm đọc từ PostgreSQL. Mọi thao tác (xem, tìm, thêm giỏ,
+  bỏ giỏ, checkout) bắn một event vào MongoDB và hiện ngay trên panel *Event Stream*.
+  Đặt hàng tạo đơn thật, kích hoạt trigger trừ tồn kho; đặt quá số lượng tồn thì
+  trigger chặn và toàn bộ transaction rollback — thông báo lỗi hiện nguyên văn trên UI.
+- **`/dashboard`** — chạy trực tiếp 10 view/procedure nghiệp vụ, cộng phễu chuyển đổi
+  tính bằng MongoDB aggregation pipeline.
+
+Event sinh từ UI có thêm trường `source: "live_ui"` để phân biệt với dữ liệu mock,
+nhưng cùng cấu trúc document nên nằm chung một không gian phân tích.
+
 ## Mười yêu cầu nghiệp vụ
 
 Chi tiết tại [`docs/01_yeu_cau_nghiep_vu.md`](docs/01_yeu_cau_nghiep_vu.md). Tóm tắt:

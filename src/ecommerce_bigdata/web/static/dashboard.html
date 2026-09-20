@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dashboard phân tích</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<header>
+  <h1>Dashboard phân tích</h1>
+  <span class="tag">10 yêu cầu nghiệp vụ</span>
+  <span class="tag">Phễu chuyển đổi từ MongoDB</span>
+  <nav>
+    <a href="/">Storefront</a>
+    <a href="/dashboard" class="active">Dashboard phân tích</a>
+  </nav>
+</header>
+
+<div style="padding:18px 22px">
+  <div class="panel" style="margin-bottom:18px">
+    <h2>Phễu chuyển đổi — tính trực tiếp bằng MongoDB aggregation pipeline</h2>
+    <div id="funnel"></div>
+    <div class="muted" style="font-size:11.5px;margin-top:10px">
+      Đếm theo <code>session_id</code> duy nhất ở mỗi bước. Dữ liệu gồm cả event mock
+      lẫn event sinh từ storefront.
+    </div>
+  </div>
+
+  <div class="panel">
+    <h2>Truy vấn nghiệp vụ</h2>
+    <div class="toolbar" id="yc-buttons"></div>
+    <div id="result-title" style="font-weight:650;margin:6px 0 10px"></div>
+    <div class="table-wrap"><table id="result-table"></table></div>
+  </div>
+</div>
+
+<script src="/static/dashboard.js"></script>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Storefront — Demo luồng sự kiện</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<header>
+  <h1>E-Commerce Demo</h1>
+  <span class="tag">PostgreSQL · giao dịch</span>
+  <span class="tag">MongoDB · hành vi</span>
+  <nav>
+    <a href="/" class="active">Storefront</a>
+    <a href="/dashboard">Dashboard phân tích</a>
+  </nav>
+</header>
+
+<div class="layout">
+  <!-- ============================ CỘT TRÁI: cửa hàng ============================ -->
+  <div>
+    <div class="panel" style="margin-bottom:18px">
+      <h2>Phiên làm việc</h2>
+      <div class="toolbar">
+        <select id="customer"><option value="">Khách vãng lai (chưa đăng nhập)</option></select>
+        <select id="category"><option value="">Tất cả danh mục</option></select>
+        <input id="search" placeholder="Tìm sản phẩm..." style="flex:1;min-width:160px">
+        <button id="btn-search">Tìm</button>
+      </div>
+      <div class="muted" style="font-size:12px">
+        session_id: <code id="sid"></code>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h2>Sản phẩm <span class="muted" id="prod-count"></span></h2>
+      <div class="grid" id="products"></div>
+    </div>
+  </div>
+
+  <!-- ============================ CỘT PHẢI: giỏ + event ============================ -->
+  <div>
+    <div class="panel" style="margin-bottom:18px">
+      <h2>Giỏ hàng → PostgreSQL</h2>
+      <div id="cart"><div class="muted" style="font-size:12px">Giỏ hàng trống</div></div>
+      <div class="toolbar" style="margin:12px 0 0">
+        <select id="province" style="flex:1">
+          <option>Ha Noi</option><option>TP Ho Chi Minh</option><option>Da Nang</option>
+          <option>Hai Phong</option><option>Can Tho</option><option>Binh Duong</option>
+        </select>
+        <button class="primary" id="btn-checkout">Đặt hàng</button>
+      </div>
+      <div id="order-result"></div>
+    </div>
+
+    <div class="panel">
+      <h2>Event Stream → MongoDB</h2>
+      <div class="stats">
+        <div class="stat"><div class="v" id="ev-total">–</div><div class="k">Tổng event</div></div>
+        <div class="stat"><div class="v" id="ev-live">–</div><div class="k">Sinh từ UI này</div></div>
+      </div>
+      <div class="toolbar">
+        <button class="ghost" id="btn-refresh">Làm mới</button>
+        <label style="font-size:12px;display:flex;align-items:center;gap:6px">
+          <input type="checkbox" id="only-live" style="width:auto"> chỉ event từ UI
+        </label>
+      </div>
+      <div class="feed" id="feed"></div>
+    </div>
+  </div>
+</div>
+
+<script src="/static/tracker.js"></script>
+<script src="/static/storefront.js"></script>
+</body>
+</html>
