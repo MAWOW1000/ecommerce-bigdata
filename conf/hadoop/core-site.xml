@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+<!-- Cau hinh Hadoop che do pseudo-distributed: mot may dong ca vai tro
+     NameNode lan DataNode. Du de minh hoa dung co che HDFS that. -->
+<configuration>
+
+  <property>
+    <name>fs.defaultFS</name>
+    <value>hdfs://127.0.0.1:9000</value>
+    <description>Dia chi NameNode - moi duong dan hdfs:// deu tro ve day</description>
+  </property>
+
+  <property>
+    <name>hadoop.tmp.dir</name>
+    <value>DATA_DIR/hdfs/tmp</value>
+  </property>
+
+  <!-- Cho phep nguoi dung hien tai thao tac, khong dung Kerberos -->
+  <property>
+    <name>hadoop.security.authentication</name>
+    <value>simple</value>
+  </property>
+
+</configuration>

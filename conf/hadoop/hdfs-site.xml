@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+<configuration>
+
+  <property>
+    <name>dfs.replication</name>
+    <value>1</value>
+    <description>
+      Chi co mot DataNode nen he so nhan ban dat bang 1.
+      Trong cum that gia tri mac dinh la 3: moi khoi du lieu duoc luu tren
+      ba may khac nhau de chiu duoc hong o cung.
+    </description>
+  </property>
+
+  <property>
+    <name>dfs.namenode.name.dir</name>
+    <value>file://DATA_DIR/hdfs/name</value>
+    <description>Noi NameNode luu metadata: cay thu muc va vi tri cac khoi</description>
+  </property>
+
+  <property>
+    <name>dfs.datanode.data.dir</name>
+    <value>file://DATA_DIR/hdfs/data</value>
+    <description>Noi DataNode luu du lieu thuc cua cac khoi</description>
+  </property>
+
+  <property>
+    <name>dfs.blocksize</name>
+    <value>16777216</value>
+    <description>
+      Kich thuoc khoi 16 MB. Mac dinh cua Hadoop la 128 MB, nhung du lieu
+      cua do an chi vai chuc MB nen dat nho hon de thay ro co che chia khoi.
+    </description>
+  </property>
+
+  <property>
+    <name>dfs.permissions.enabled</name>
+    <value>false</value>
+    <description>Tat kiem tra quyen cho moi truong phat trien</description>
+  </property>
+
+  <property>
+    <name>dfs.namenode.http-address</name>
+    <value>127.0.0.1:9870</value>
+    <description>Giao dien web cua NameNode</description>
+  </property>
+
+</configuration>

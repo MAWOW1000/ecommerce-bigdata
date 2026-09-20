@@ -52,7 +52,9 @@ CHAPTERS = [
     ("01_yeu_cau_nghiep_vu.md", "CHƯƠNG 1. TỔNG QUAN BÀI TOÁN"),
     ("02_thiet_ke_csdl.md", "CHƯƠNG 2. THIẾT KẾ VÀ QUẢN TRỊ CSDL QUAN HỆ"),
     ("03_nosql.md", "CHƯƠNG 3. LƯU TRỮ DỮ LIỆU PHI CẤU TRÚC (NoSQL)"),
-    ("04_phan_tich.md", "CHƯƠNG 4. XỬ LÝ VÀ PHÂN TÍCH DỮ LIỆU LỚN"),
+    ("04a_hadoop.md", "CHƯƠNG 4. XỬ LÝ VÀ PHÂN TÍCH DỮ LIỆU LỚN"),
+    ("04b_spark.md", None),          # None = noi tiep chuong trên, khong sang chuong moi
+    ("04_phan_tich.md", None),
 ]
 
 
@@ -346,11 +348,12 @@ def build() -> Path:
         if not path.exists():
             print(f"   [bo qua] thieu {filename}")
             continue
-        doc.add_heading(title, 1)
+        if title is not None:
+            doc.add_heading(title, 1)
         for block in parse_markdown(path.read_text(encoding="utf-8")):
             render_block(doc, block, path.parent)
         doc.add_page_break()
-        print(f"   [chuong] {title}")
+        print(f"   [{'chuong' if title else 'phan '}] {title or path.stem}")
 
     # --- Chuong ket luan
     doc.add_heading("KẾT LUẬN", 1)
