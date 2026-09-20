@@ -16,3 +16,8 @@ data/logs/
 data/export/
 .env
 *.log
+
+# --- Frontend ---
+frontend/node_modules/
+frontend/shot.mjs
+frontend/.vite/

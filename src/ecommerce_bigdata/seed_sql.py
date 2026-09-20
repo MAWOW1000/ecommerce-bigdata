@@ -39,6 +39,53 @@ CATEGORY_TREE: dict[str, list[str]] = {
     "The thao":     ["Dung cu tap luyen", "Trang phuc the thao"],
 }
 
+# Tu vung dat ten san pham theo tung danh muc con, de du lieu demo doc duoc
+# thay vi chuoi ngau nhien vo nghia.
+PRODUCT_VOCAB: dict[str, tuple[list[str], list[str]]] = {
+    "Dien thoai":          (["iPhone", "Galaxy", "Xiaomi", "OPPO", "vivo", "realme"],
+                            ["15 Pro", "S24 Ultra", "Note 13", "Reno 11", "V30", "12 Pro"]),
+    "May tinh bang":       (["iPad", "Galaxy Tab", "Xiaomi Pad", "Lenovo Tab"],
+                            ["Air M2", "S9 FE", "6 Pro", "P12 Pro"]),
+    "Laptop":              (["MacBook", "ThinkPad", "Vivobook", "Nitro", "Inspiron"],
+                            ["Air M3", "X1 Carbon", "S15 OLED", "V16 RTX4060", "15 3520"]),
+    "Phu kien dien tu":    (["Tai nghe", "Sac nhanh", "Cap sac", "Chuot khong day", "Ban phim co"],
+                            ["Bluetooth 5.3", "GaN 65W", "USB-C 2m", "Silent 2.4G", "RGB hot-swap"]),
+    "Ao nam":              (["Ao thun nam", "Ao so mi nam", "Ao polo nam", "Ao khoac nam"],
+                            ["cotton co tron", "tay dai cong so", "pique co be", "gio 2 lop"]),
+    "Ao nu":               (["Ao kieu nu", "Ao so mi nu", "Ao len nu", "Ao croptop"],
+                            ["tay phong", "lua cao cap", "long cuu", "tron basic"]),
+    "Quan nam":            (["Quan jean nam", "Quan kaki nam", "Quan short nam", "Quan tay nam"],
+                            ["slim fit", "ong suong", "the thao", "cong so"]),
+    "Quan nu":             (["Quan jean nu", "Quan legging", "Chan vay", "Quan culottes"],
+                            ["lung cao", "co gian 4 chieu", "xep ly", "vai linen"]),
+    "Giay dep":            (["Giay the thao", "Giay luoi", "Dep quai ngang", "Sandal"],
+                            ["de em chong truot", "da lon", "chong nuoc", "quai duc"]),
+    "Nha bep":             (["Noi chien khong dau", "Bo dao", "Chao chong dinh", "May xay sinh to"],
+                            ["5.5L", "inox 6 mon", "28cm granite", "1.5L 3 coi"]),
+    "Do dung phong tam":   (["Ke nha tam", "Khan tam", "May say toc", "Voi sen tang ap"],
+                            ["inox 304", "cotton 100%", "ion am 1800W", "3 che do"]),
+    "Noi that nho":        (["Ke sach", "Ban lam viec", "Ghe cong thai hoc", "Den ban"],
+                            ["5 tang go MDF", "120cm chan sat", "luoi tua dau", "LED chong can"]),
+    "Sach van hoc":        (["Tieu thuyet", "Tap truyen ngan", "Tho", "Tan van"],
+                            ["ban dac biet", "bia cung", "tai ban 2025", "song ngu"]),
+    "Sach ky nang":        (["Sach ky nang", "Sach quan tri", "Sach tai chinh", "Sach giao tiep"],
+                            ["tu duy phan bien", "lanh dao nhom", "dau tu ca nhan", "thuyet trinh"]),
+    "Sach thieu nhi":      (["Truyen tranh", "Sach to mau", "Truyen co tich", "Sach khoa hoc nhi"],
+                            ["tron bo 5 tap", "kho lon A4", "minh hoa mau", "thi nghiem vui"]),
+    "Cham soc da":         (["Sua rua mat", "Kem chong nang", "Serum", "Mat na giay"],
+                            ["dju nhe pH5.5", "SPF50+ PA++++", "vitamin C 10%", "hop 10 mieng"]),
+    "Trang diem":          (["Son li", "Kem nen", "Phan phu", "Mascara"],
+                            ["ben mau 12h", "che khuyet diem", "kiem dau", "chong troi"]),
+    "Nuoc hoa":            (["Nuoc hoa nam", "Nuoc hoa nu", "Xit thom co the"],
+                            ["EDP 50ml", "EDT 100ml", "huong go", "huong hoa co"]),
+    "Dung cu tap luyen":   (["Ta tay", "Tham yoga", "Day khang luc", "May chay bo"],
+                            ["cap 5kg", "TPE 8mm", "bo 5 muc", "gap gon"]),
+    "Trang phuc the thao": (["Ao thun the thao", "Quan short chay bo", "Bo do gym", "Ao khoac gio"],
+                            ["thoat mo hoi", "2 lop tui khoa", "co gian 4 chieu", "chong tia UV"]),
+}
+
+BRAND_SUFFIX = ["Pro", "Plus", "Lite", "Max", "2025", "Premium", "Classic", ""]
+
 COLORS = ["Den", "Trang", "Xanh", "Do", "Xam", "Be", None]
 SIZES = ["S", "M", "L", "XL", "Free", None]
 
@@ -82,6 +129,7 @@ def seed() -> dict[str, int]:
         # ---------------------------------------------------------- Danh muc
         print(">> Sinh danh muc ...")
         category_ids: list[int] = []
+        category_names: dict[int, str] = {}
         for parent, children in CATEGORY_TREE.items():
             cur.execute(
                 "INSERT INTO Category (CategoryName, ParentID) VALUES (%s, NULL) "
@@ -95,7 +143,9 @@ def seed() -> dict[str, int]:
                     "RETURNING CategoryID",
                     (child, parent_id),
                 )
-                category_ids.append(cur.fetchone()[0])
+                child_id = cur.fetchone()[0]
+                category_ids.append(child_id)
+                category_names[child_id] = child
 
         # ---------------------------------------------------------- Nguoi ban
         print(f">> Sinh {SEED.sellers} nguoi ban ...")
@@ -141,14 +191,22 @@ def seed() -> dict[str, int]:
         variant_pool: list[tuple[int, Decimal]] = []   # (VariantID, gia ban)
         for i in range(SEED.products):
             base_price = Decimal(random.randrange(50_000, 25_000_000, 10_000))
+            cat_id = random.choice(category_ids)
+            cat_name = category_names[cat_id]
+            nouns, specs = PRODUCT_VOCAB.get(cat_name, (["San pham"], ["tieu chuan"]))
+            suffix = random.choice(BRAND_SUFFIX)
+            product_name = " ".join(filter(None, [
+                random.choice(nouns), random.choice(specs), suffix,
+            ]))
+
             cur.execute(
                 "INSERT INTO Product (SellerID, CategoryID, ProductName, Description, "
                 "BasePrice, IsApproved, CreatedAt) VALUES (%s,%s,%s,%s,%s,%s,%s) "
                 "RETURNING ProductID",
                 (
                     random.choice(seller_ids),
-                    random.choice(category_ids),
-                    f"{fake.word().capitalize()} {fake.word()} {i:04d}",
+                    cat_id,
+                    product_name,
                     fake.sentence(nb_words=12),
                     base_price,
                     random.random() < 0.92,

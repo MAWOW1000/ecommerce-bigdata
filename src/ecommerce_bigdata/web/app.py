@@ -33,6 +33,9 @@ app = FastAPI(title="E-Commerce Analytics Demo", version="1.0.0")
 
 app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
 
+if (STATIC_DIR / "app" / "assets").exists():
+    app.mount("/app", StaticFiles(directory=STATIC_DIR / "app"), name="spa")
+
 _mongo = MongoClient(MONGO.uri)
 _events = _mongo[MONGO.database]["clickstream_events"]
 
@@ -54,15 +57,34 @@ def _rows(cur) -> list[dict]:
     return [{c: _jsonable(v) for c, v in zip(cols, row)} for row in cur.fetchall()]
 
 
+# So anh minh hoa da tai ve local bang scripts/fetch_product_images.sh
+IMAGE_COUNT = 48
+
+
+def _image_url(product_id: int) -> str:
+    """Gan on dinh moi san pham mot anh trong bo anh local."""
+    return f"/static/img/products/p{product_id % IMAGE_COUNT}.jpg"
+
+
 # ============================================================ Trang HTML
+SPA_INDEX = STATIC_DIR / "app" / "index.html"
+
+
+def _page() -> FileResponse:
+    """Uu tien giao dien React da build; chua build thi dung ban HTML thuan."""
+    if SPA_INDEX.exists():
+        return FileResponse(SPA_INDEX)
+    return FileResponse(STATIC_DIR / "storefront.html")
+
+
 @app.get("/")
 def storefront() -> FileResponse:
-    return FileResponse(STATIC_DIR / "storefront.html")
+    return _page()
 
 
 @app.get("/dashboard")
 def dashboard() -> FileResponse:
-    return FileResponse(STATIC_DIR / "dashboard.html")
+    return _page()
 
 
 # ============================================================ Danh muc / san pham
@@ -112,7 +134,13 @@ def list_products(category_id: int | None = None, q: str | None = None,
     params.append(limit)
 
     with _pg() as conn:
-        return _rows(conn.execute(sql, params))
+        rows = _rows(conn.execute(sql, params))
+
+    for r in rows:
+        r["image_url"] = _image_url(r["productid"])
+        # So da ban - dung hien thi kieu "Da ban N" giong san TMDT
+        r["sold"] = (r["productid"] * 37) % 900 + 12
+    return rows
 
 
 @app.get("/api/customers")

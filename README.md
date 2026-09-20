@@ -18,7 +18,9 @@
 | CSDL quan hệ | SQL Server 2022 (bản nộp) / PostgreSQL 17 (bản chạy thử) |
 | NoSQL | MongoDB 8.0 (cài native, không Docker) |
 | Ngôn ngữ | Python 3.13 |
-| Quản lý package | [uv](https://github.com/astral-sh/uv) |
+| Giao diện | React 19 + TypeScript + Vite + Tailwind v4 + shadcn/ui |
+| Biểu đồ trên web | Recharts |
+| Quản lý package | [uv](https://github.com/astral-sh/uv) (Python) · pnpm (JS) |
 | Thư viện | `psycopg`, `pymongo`, `faker`, `pandas`, `matplotlib`, `python-docx` |
 
 ## Cấu trúc
@@ -32,7 +34,8 @@
 │   ├── seed_sql.py    # Sinh dữ liệu giả lập cho CSDL quan hệ
 │   ├── seed_mongo.py  # Sinh clickstream + log quét mã vạch
 │   └── analytics.py   # Join SQL ↔ MongoDB, vẽ biểu đồ
-├── scripts/         # Cài đặt và khởi động MongoDB / PostgreSQL
+├── frontend/        # Giao diện React (Vite), build ra web/static/app
+├── scripts/         # Cài đặt và khởi động MongoDB / PostgreSQL / web
 └── assets/          # ERD và biểu đồ xuất ra
 ```
 
@@ -64,8 +67,13 @@ uv run python -m ecommerce_bigdata.analytics    # Chương 4: join + biểu đ�
 ## Ứng dụng demo
 
 ```bash
-./scripts/restart_web.sh        # http://127.0.0.1:8000
+./scripts/fetch_product_images.sh   # tải ảnh minh hoạ về local (chỉ cần 1 lần)
+cd frontend && pnpm install && pnpm build && cd ..
+./scripts/restart_web.sh            # http://127.0.0.1:8000
 ```
+
+Bản build sẵn đã nằm trong repo nên có thể bỏ qua bước `pnpm build` nếu chỉ cần chạy demo.
+Khi phát triển giao diện thì chạy `pnpm dev` (port 5173, đã cấu hình proxy `/api` sang 8000).
 
 Hai trang:
 
